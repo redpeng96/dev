@@ -1,0 +1,5 @@
+//*[@id="info"]
+
+/html/body/ytd-app/div/ytd-page-manager/ytd-watch-flexy/div[4]/div[1]/div/div[7]/div[2]/ytd-video-primary-info-renderer/div/div
+
+pip
