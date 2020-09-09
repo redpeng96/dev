@@ -11,5 +11,3 @@ cartoons = soup.find_all("a", attrs={"class":"title"})
 
 for cartoon in cartoons:
     print(cartoon.get_text())
-
-print()
