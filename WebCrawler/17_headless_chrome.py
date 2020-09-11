@@ -1,20 +1,19 @@
 import time
 import requests
 from bs4 import BeautifulSoup
-
 from selenium import webdriver
-browser = webdriver.Chrome("./chromedriver")
+
+
+# Headless Chrome settings
+options = webdriver.ChromeOptions()
+options.headless = True
+options.add_argument("window-size=2560x1600")
+browser = webdriver.Chrome("./chromedriver", options=options)
 browser.maximize_window()
 
 url = "https://play.google.com/store/movies/collection/cluster?clp=0g4XChUKD3RvcHNlbGxpbmdfcGFpZBAHGAQ%3D:S:ANO1ljJvXQM&gsr=ChrSDhcKFQoPdG9wc2VsbGluZ19wYWlkEAcYBA%3D%3D:S:ANO1ljK7jAA"
 
 browser.get(url)
-
-# scroll down to 0x1600
-#browser.execute_script("window.scrollTo(0, 1600)")
-
-# scroll down to the bottom of a page
-#browser.execute_script("window.scrollTo(0, document.body.scrollHeight)")
 
 prev_height = browser.execute_script("return document.body.scrollHeight")
 
@@ -30,9 +29,11 @@ while True:
 print("Scroll Finished!!!")
 
 
-soup = BeautifulSoup(browser.page_source, "lxml")
+# Create screenshot
+browser.get_screenshot_as_file("gmovie.png")
 
-#movies = soup.find_all("div", attrs={"class":["ImZGtf mpg5gc", "Vpfmgd"]})
+
+soup = BeautifulSoup(browser.page_source, "lxml")
 movies = soup.find_all("div", attrs={"class":"Vpfmgd"})
 
 print(len(movies))
@@ -53,7 +54,6 @@ for movie in movies:
     print("Org Price: "+ org_price, "/", "Price: " + price)
     print("https://play.google.com" + link)
     print("-" * 100, "\n")
-
 
 time.sleep(2)
 browser.quit()
