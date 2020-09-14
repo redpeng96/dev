@@ -15,6 +15,10 @@ soup = BeautifulSoup(res.text, "lxml")
 #print(soup.find(attrs={"class":"Nbtn_upload"}))
 
 rank1 = soup.find("li", attrs={"class":"rank01"})
+
+# Multi conditions
+# dust = soup.find("dl", attrs={"class":"indicator", "id":"ust"}, text=["fine_dust", "ultra_fine_dust"])
+
 #print(rank1.parent.get_text())\
 
 #print(rank1.find_next_sibling("li").a.get_text())

@@ -19,3 +19,6 @@ for idx, item in enumerate(items):
     print(f"동 : {column[3].get_text().strip()}동")
     print(f"층: {column[4].get_text().strip()}", "\n")
     
+
+# Multi conditions
+# dust = soup.find("dl", attrs={"class":"indicator", "id":"ust"}, text=["fine_dust", "ultra_fine_dust"])
