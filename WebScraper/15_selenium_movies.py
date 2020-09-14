@@ -18,3 +18,4 @@ print(len(movies))
 for movie in movies:
     title = movie.find("div", attrs={"class":"WsMG1c nnK0zc"}).get_text()
     print(title)
+
