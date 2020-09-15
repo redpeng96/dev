@@ -1,7 +1,7 @@
 from tkinter import *
 
 root = Tk()
-root.title("Daily Update")
+root.title("LABEL")
 root.geometry("800x600+300+100")
 
 label1 = Label(root, pady=30, text="Hello World!")

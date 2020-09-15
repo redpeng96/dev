@@ -1,7 +1,7 @@
 from tkinter import *
 
 root = Tk()
-root.title("Daily Update")
+root.title("BUTTON")
 root.geometry("800x600+300+100")
 
 btn1 = Button(root, text="BUTTON-01")

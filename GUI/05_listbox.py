@@ -1,20 +1,29 @@
 from tkinter import *
 
 root = Tk()
-root.title("Daily Update")
+root.title("LIST BOX")
 root.geometry("800x600+300+100")
 
-txt = Text(root, width=50, height=5)
-txt.pack()
-txt.insert(END, "Input: ")
+listbox = Listbox(root, selectmode="extended", height=0)
+#listbox = Listbox(root, selectmode="single", height=2)
 
-e = Entry(root, width=40)
-e.pack()
-e.insert(0, "Input one line: ")
+listbox.insert(0, "APPLE")
+listbox.insert(1, "STRAWBERRY")
+listbox.insert(2, "BANANA")
+listbox.insert(END, "WATERMELON")
+listbox.insert(END, "GRAPE")
+listbox.pack()
 
 
 def btncmd():
-    pass
+    #listbox.delete(END)
+    #listbox.delete(0)
+    print(listbox.size())
+    print(listbox.get(0, 2))
+    
+    ### Return the indexes of current selection.
+    print(listbox.curselection())
+
 
 btn = Button(root, text="Click", command=btncmd)
 btn.pack()

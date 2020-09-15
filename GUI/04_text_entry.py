@@ -1,7 +1,7 @@
 from tkinter import *
 
 root = Tk()
-root.title("Daily Update")
+root.title("TEXT ENTRY")
 root.geometry("800x600+300+100")
 
 txt = Text(root, width=50, height=5)
