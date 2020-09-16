@@ -1,7 +1,7 @@
 from tkinter import *
 
 root = Tk()
-root.title("TITLE")
+root.title("FRAME")
 root.geometry("800x600+300+100")
 
 

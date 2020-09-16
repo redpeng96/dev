@@ -2,7 +2,7 @@
 from tkinter import *
 
 root = Tk()
-root.title("TITLE")
+root.title("MENU")
 root.geometry("800x600+300+100")
 
 def create_new_file():

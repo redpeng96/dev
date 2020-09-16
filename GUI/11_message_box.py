@@ -2,7 +2,7 @@ import tkinter.messagebox as msgbox
 from tkinter import *
 
 root = Tk()
-root.title("TITLE")
+root.title("MESSAGE BOX")
 root.geometry("800x600+300+100")
 
 def info():

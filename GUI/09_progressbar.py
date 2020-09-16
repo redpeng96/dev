@@ -3,7 +3,7 @@ import tkinter.ttk as ttk
 from tkinter import *
 
 root = Tk()
-root.title("TITLE")
+root.title("PROGRESS BAR")
 root.geometry("800x600+300+100")
 
 progressbar = ttk.Progressbar(root, maximum=100, length=150, mode="indeterminate")
