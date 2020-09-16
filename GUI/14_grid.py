@@ -19,7 +19,7 @@ btn5 = Button(root, text="0", width=5, height=3)
 btn6 = Button(root, text=".", width=5, height=3)
 
 #btn1.pack(side="left")
-#btn2.pack(side="left")
+
 
 btn1.grid(row=0, column=0, sticky=N+E+W+S, padx=3, pady=3)
 btn2.grid(row=0, column=1, sticky=N+E+W+S, padx=3, pady=3)
