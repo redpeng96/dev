@@ -29,3 +29,5 @@ btn5.grid(row=1, column=0, columnspan=2, sticky=N+E+W+S, padx=3, pady=3)
 btn6.grid(row=1, column=2, sticky=N+E+W+S, padx=3, pady=3)
 
 root.mainloop()
+
+
