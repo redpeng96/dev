@@ -1,19 +1,30 @@
 import tkinter.ttk as ttk
+import tkinter.messagebox as msgbox
 from tkinter import *
+from tkinter import filedialog
 
 root = Tk()
 root.title("Image Merger")
 root.resizable(False, False)
 
 ### File Frame
+def add_file():
+    files = filedialog.askopenfilenames(title="Select image files...", filetypes=(("PNG files", "*.png"), ("ALL Files", "*.*")), initialdir="C:/")
+    for file in files:
+        list_box.insert(END, file)
+
+def del_file():
+    for idx in reversed(list_box.curselection()):
+        list_box.delete(idx)
+
 
 file_frame = Frame(root)
 file_frame.pack(fill="x")
 
-btn_add_file = Button(file_frame, padx=10, pady=10, width=15, text="Add File")
+btn_add_file = Button(file_frame, padx=10, pady=10, width=15, text="Add File", command=add_file)
 btn_add_file.pack(side="left")
 
-btn_del_file = Button(file_frame, padx=10, pady=10, width=15, text="Delete File")
+btn_del_file = Button(file_frame, padx=10, pady=10, width=15, text="Delete File", command=del_file)
 btn_del_file.pack(side="right")
 
 
@@ -32,13 +43,21 @@ scrollbar.config(command=list_box.yview)
 
 ### Save Path Frame
 
+def browse_dst_path():
+    dst_dir = filedialog.askdirectory()
+    if dst_dir == '':
+        return
+    txt_dest_path.delete(0, END)
+    txt_dest_path.insert(0, dst_dir)
+
+
 path_frame = LabelFrame(root, text="SAVE PATH")
 path_frame.pack(fill="x", padx=10, pady=10)
 
 txt_dest_path = Entry(path_frame)
 txt_dest_path.pack(side="left", fill="x", expand="y", ipady=4)
 
-btn_dest_path = Button(path_frame, text="FIND", width=10)
+btn_dest_path = Button(path_frame, text="FIND", width=10, command=browse_dst_path)
 btn_dest_path.pack(side="right")
 
 
@@ -88,10 +107,21 @@ progress_bar.pack(fill="x", padx=10, pady=10)
 
 ### Run Frame
 
+def start():
+    if list_box.size() == 0:
+        msgbox.showwarning("Warning", "Add image files...")
+        return
+    
+    if len(txt_dest_path.get()) == 0:
+        msgbox.showwarning("Warning", "Input save path...")
+        return
+
+
+
 frame_run = Frame(root)
 frame_run.pack(fill="x", padx=10, pady=10)
 
-btn_start = Button(frame_run, padx=5, pady=5, text="START", width=12)
+btn_start = Button(frame_run, padx=5, pady=5, text="START", width=12, command=start)
 btn_start.pack(side="right")
 
 btn_close = Button(frame_run, padx=5, pady=5, text="CLOSE", width=12, command=root.quit)
