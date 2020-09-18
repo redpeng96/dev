@@ -110,29 +110,64 @@ progress_bar.pack(fill="x", padx=10, pady=10)
 
 ### Run Frame
 def merge_image():
-    images = [Image.open(x) for x in list_box.get(0, END)]
+    try:
+        img_width = cmb_width.get()
+        if img_width == "Keep":
+            img_width = -1
+        else:
+            img_width = int(img_width)
 
-    #widths = [x.size[0] for x in images]
-    #heights = [x.size[1] for x in images]
-    widths, heights = zip(*(x.size for x in images))
+        img_space = cmb_space.get()
+        if img_space == "Narrow":
+            img_space = 30
+        elif img_space == "Normal":
+            img_space = 60
+        elif img_space == "Large":
+            img_space = 90
+        else:
+            img_space == 0
 
-    # Get background size
-    max_width, total_height = max(widths), sum(heights)
-    # Create background
-    result_img = Image.new("RGB", (max_width, total_height), (255, 255, 255))
-    y_offset = 0
-    for idx, img in enumerate(images):
-        result_img.paste(img, (0, y_offset))
-        y_offset += img.size[1]
+        img_format = cmb_format.get().lower()
 
-        progress = (idx +1) / len(images) * 100
-        p_var.set(progress)
-        progress_bar.update()
+        images = [Image.open(x) for x in list_box.get(0, END)]
+        image_sizes = []
+        if img_width > -1:
+        # x:y=a:b
+        # b=ya / x
+            image_sizes = [(int(img_width), int(x.size[1] * img_width / x.size[0])) for x in images]
+        else:
+            image_sizes = [(x.size[0], x.size[1]) for x in images]
 
-    dest_path = os.path.join(txt_dest_path.get(), "result.jpg")
-    result_img.save(dest_path)
-    msgbox.showinfo("Info", "The job has been finished...")
 
+        #widths = [x.size[0] for x in images]
+        #heights = [x.size[1] for x in images]
+        widths, heights = zip(*(image_sizes))
+
+        # Get background size
+        max_width, total_height = max(widths), sum(heights)
+        # Create background
+        if img_space > 0:
+            total_height += img_space * (len(images) - 1)
+
+        result_img = Image.new("RGB", (max_width, total_height), (255, 255, 255))
+        y_offset = 0
+        for idx, img in enumerate(images):
+            if img_width > -1:
+                img = img.resize(image_sizes[idx])
+
+            result_img.paste(img, (0, y_offset))
+            y_offset += img.size[1] + img_space
+
+            progress = (idx +1) / len(images) * 100
+            p_var.set(progress)
+            progress_bar.update()
+
+        dest_path = os.path.join(txt_dest_path.get(), "result." + img_format)
+        result_img.save(dest_path)
+        msgbox.showinfo("Info", "The job has been finished...")
+    except Exception as err:
+        msgbox.showerror("Error", err)
+        
 
 def start():
     if list_box.size() == 0:
