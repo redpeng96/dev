@@ -111,8 +111,10 @@ progress_bar.pack(fill="x", padx=10, pady=10)
 ### Run Frame
 def merge_image():
     images = [Image.open(x) for x in list_box.get(0, END)]
-    widths = [x.size[0] for x in images]
-    heights = [x.size[1] for x in images]
+
+    #widths = [x.size[0] for x in images]
+    #heights = [x.size[1] for x in images]
+    widths, heights = zip(*(x.size for x in images))
 
     # Get background size
     max_width, total_height = max(widths), sum(heights)
